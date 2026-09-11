@@ -101,13 +101,14 @@
 
       <section class="video-section">
         <div class="video-wrap">
-          <video autoplay muted loop playsinline preload="metadata" poster="assets/images/86234.jpg"><source src="assets/videos/silversurfer.mp4" type="video/mp4" /></video>
+          <video id="main-video" data-src="assets/videos/silversurfer.mp4" autoplay muted loop playsinline preload="metadata" poster="assets/images/86234.jpg"><source src="assets/videos/silversurfer.mp4" type="video/mp4" /></video>
           <div class="video-shade"></div><p class="video-word">SLVR</p><p class="video-caption">THE SILVER REVOLUTION IS ON ROBINHOOD CHAIN.</p>
+          <button class="sound-toggle" type="button" aria-pressed="false" aria-label="Enable video sound"><span class="sound-icon">◖))</span><span>Sound off</span></button>
         </div>
         <div class="reel-grid" aria-label="Silver Surfer videos">
-          <article><p>REEL 01</p><video muted loop playsinline controls preload="metadata" poster="assets/images/86235.jpg"><source src="assets/videos/video1.mp4" type="video/mp4" /></video></article>
-          <article><p>REEL 02</p><video muted loop playsinline controls preload="metadata" poster="assets/images/86238.jpg"><source src="assets/videos/video2.mp4" type="video/mp4" /></video></article>
-          <article><p>REEL 03</p><video muted loop playsinline controls preload="metadata" poster="assets/images/86239.jpg"><source src="assets/videos/video3.mp4" type="video/mp4" /></video></article>
+          <button class="reel-card" type="button" data-video-src="assets/videos/video1.mp4" data-poster="assets/images/86235.jpg"><span>REEL 01</span><img src="assets/images/86235.jpg" alt="Play Silver Surfer reel 1" loading="lazy" /><b>Play <i>↗</i></b></button>
+          <button class="reel-card" type="button" data-video-src="assets/videos/video2.mp4" data-poster="assets/images/86238.jpg"><span>REEL 02</span><img src="assets/images/86238.jpg" alt="Play Silver Surfer reel 2" loading="lazy" /><b>Play <i>↗</i></b></button>
+          <button class="reel-card" type="button" data-video-src="assets/videos/video3.mp4" data-poster="assets/images/86239.jpg"><span>REEL 03</span><img src="assets/images/86239.jpg" alt="Play Silver Surfer reel 3" loading="lazy" /><b>Play <i>↗</i></b></button>
         </div>
       </section>
 
