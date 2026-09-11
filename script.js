@@ -1,13 +1,13 @@
-const TEMP_CA = 'CA coming soon';
+const TEMP_CA = '0x5D375C4c3809E8BAda0b8D818B359231384016dF';
 
 document.querySelectorAll('[data-copy-ca]').forEach((button) => {
   button.addEventListener('click', async () => {
     const toast = document.querySelector('.toast');
     try {
       await navigator.clipboard.writeText(TEMP_CA);
-      toast.textContent = 'Contract address is coming soon.';
+      toast.textContent = 'Contract copied.';
     } catch {
-      toast.textContent = 'Contract address is coming soon.';
+      toast.textContent = 'Contract copied.';
     }
     toast.classList.add('show');
     window.setTimeout(() => toast.classList.remove('show'), 2200);
