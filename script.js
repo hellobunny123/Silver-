@@ -61,3 +61,42 @@ document.querySelectorAll('.reel-card').forEach((card) => {
     mainVideo.closest('.video-section')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 });
+
+const marquee = document.querySelector('.marquee-track');
+const lightbox = document.querySelector('.image-lightbox');
+const lightboxImage = lightbox?.querySelector('img');
+const closeLightbox = () => {
+  lightbox?.classList.remove('open');
+  lightbox?.setAttribute('aria-hidden', 'true');
+  marquee?.classList.remove('is-paused');
+};
+
+document.querySelectorAll('.marquee-track img').forEach((image) => {
+  image.setAttribute('tabindex', '0');
+  image.setAttribute('role', 'button');
+  image.setAttribute('aria-label', 'Open image');
+  const openImage = () => {
+    if (!lightbox || !lightboxImage) return;
+    marquee?.classList.add('is-paused');
+    lightboxImage.src = image.currentSrc || image.src;
+    lightboxImage.alt = image.alt;
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    lightbox.querySelector('.lightbox-close')?.focus();
+  };
+  image.addEventListener('click', openImage);
+  image.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openImage();
+    }
+  });
+});
+
+lightbox?.addEventListener('click', (event) => {
+  if (event.target === lightbox) closeLightbox();
+});
+lightbox?.querySelector('.lightbox-close')?.addEventListener('click', closeLightbox);
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && lightbox?.classList.contains('open')) closeLightbox();
+});
