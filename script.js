@@ -1,5 +1,41 @@
 const TEMP_CA = '0x5D375C4c3809E8BAda0b8D818B359231384016dF';
 
+const formatUsd = (value) => {
+  if (!Number.isFinite(value)) return 'Unavailable';
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    notation: 'compact',
+    maximumFractionDigits: 1,
+  }).format(value);
+};
+
+const updateDexStats = async () => {
+  const targets = {
+    marketCap: document.querySelector('[data-dex-market-cap]'),
+    liquidity: document.querySelector('[data-dex-liquidity]'),
+    volume: document.querySelector('[data-dex-volume]'),
+  };
+  if (!targets.marketCap && !targets.liquidity && !targets.volume) return;
+
+  try {
+    const response = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${TEMP_CA}`);
+    if (!response.ok) throw new Error('Dexscreener unavailable');
+    const { pairs = [] } = await response.json();
+    const pair = pairs.find((item) => item.chainId === 'robinhood') || pairs[0];
+    if (!pair) throw new Error('Pair unavailable');
+    if (targets.marketCap) targets.marketCap.textContent = formatUsd(Number(pair.marketCap ?? pair.fdv));
+    if (targets.liquidity) targets.liquidity.textContent = formatUsd(Number(pair.liquidity?.usd));
+    if (targets.volume) targets.volume.textContent = formatUsd(Number(pair.volume?.h24));
+  } catch {
+    Object.values(targets).forEach((target) => {
+      if (target) target.textContent = 'View live ↗';
+    });
+  }
+};
+
+updateDexStats();
+
 document.querySelectorAll('[data-copy-ca]').forEach((button) => {
   button.addEventListener('click', async () => {
     const toast = document.querySelector('.toast');
