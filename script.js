@@ -1,4 +1,4 @@
-const TEMP_CA = '0x5D375C4c3809E8BAda0b8D818B359231384016dF';
+const TEMP_CA = '0xc4086d9CE6abF5F22499A5c2D7F411e53b8839EB';
 
 const formatUsd = (value) => {
   if (!Number.isFinite(value)) return 'Unavailable';
