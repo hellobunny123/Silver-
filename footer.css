@@ -1,0 +1,14 @@
+.footer-link {
+  color: var(--silver);
+  font: 500 .68rem 'DM Mono', monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid var(--green);
+  padding-bottom: .4rem;
+  transition: color .2s;
+}
+
+.footer-link:hover {
+  color: var(--green);
+}
