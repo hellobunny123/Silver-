@@ -32,7 +32,19 @@ body {
 }
 
 .hero-figure-planet img {
-  object-position: 50% 42%;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 863 / 1536;
+  object-fit: contain;
+  object-position: center;
+  clip-path: none;
+}
+
+.hero-figure-planet {
+  width: min(100%, 390px);
+  min-height: 0;
+  justify-self: center;
 }
 
 #site-sound-toggle {
