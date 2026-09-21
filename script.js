@@ -99,6 +99,17 @@ stanSoundToggle?.addEventListener('click', () => {
 });
 
 const marquee = document.querySelector('.marquee-track');
+const newGalleryImages = ['90293.jpg', '90294.jpg', '90295.jpg', '90297.jpg', '90298.jpg'];
+
+newGalleryImages.forEach((filename) => {
+  if (!marquee || marquee.querySelector(`[src="assets/images/${filename}"]`)) return;
+  const image = document.createElement('img');
+  image.src = `assets/images/${filename}`;
+  image.alt = 'Silver Surfer visual';
+  image.loading = 'lazy';
+  marquee.append(image);
+});
+
 const lightbox = document.querySelector('.image-lightbox');
 const lightboxImage = lightbox?.querySelector('img');
 const closeLightbox = () => {
