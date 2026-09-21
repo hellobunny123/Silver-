@@ -1,0 +1,52 @@
+html {
+  background: #030404;
+}
+
+body {
+  background: transparent;
+}
+
+.site-video-background {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  background: #030404;
+}
+
+.site-video-background::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(3, 4, 4, .78), rgba(3, 4, 4, .42) 48%, rgba(3, 4, 4, .72)),
+    linear-gradient(0deg, rgba(3, 4, 4, .56), transparent 42%, rgba(3, 4, 4, .3));
+}
+
+.site-video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(.72) contrast(1.08) brightness(.72);
+}
+
+#site-sound-toggle {
+  position: fixed;
+  top: 1.1rem;
+  right: 1.1rem;
+  z-index: 25;
+}
+
+@media (max-width: 800px) {
+  #site-sound-toggle {
+    top: 4.9rem;
+    right: .9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-video-background video {
+    display: none;
+  }
+}

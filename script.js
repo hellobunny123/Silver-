@@ -63,16 +63,17 @@ menu?.addEventListener('click', () => {
 });
 
 const mainVideo = document.querySelector('#main-video');
-const soundToggle = document.querySelector('.sound-toggle');
+const backgroundVideo = document.querySelector('#site-background-video');
+const soundToggle = document.querySelector('#site-sound-toggle');
 
 soundToggle?.addEventListener('click', () => {
-  if (!mainVideo) return;
-  mainVideo.muted = !mainVideo.muted;
-  mainVideo.volume = 0.75;
-  soundToggle.setAttribute('aria-pressed', String(!mainVideo.muted));
-  soundToggle.setAttribute('aria-label', mainVideo.muted ? 'Enable video sound' : 'Disable video sound');
-  soundToggle.querySelector('span:last-child').textContent = mainVideo.muted ? 'Sound off' : 'Sound on';
-  mainVideo.play().catch(() => {});
+  if (!backgroundVideo) return;
+  backgroundVideo.muted = !backgroundVideo.muted;
+  backgroundVideo.volume = 0.75;
+  soundToggle.setAttribute('aria-pressed', String(!backgroundVideo.muted));
+  soundToggle.setAttribute('aria-label', backgroundVideo.muted ? 'Enable background sound' : 'Disable background sound');
+  soundToggle.querySelector('span:last-child').textContent = backgroundVideo.muted ? 'Sound off' : 'Sound on';
+  backgroundVideo.play().catch(() => {});
 });
 
 document.querySelectorAll('.reel-card').forEach((card) => {
