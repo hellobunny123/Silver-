@@ -64,39 +64,38 @@ menu?.addEventListener('click', () => {
 
 const mainVideo = document.querySelector('#main-video');
 const backgroundVideo = document.querySelector('#site-background-video');
-const soundToggle = document.querySelector('#site-sound-toggle');
+const backgroundSoundToggle = document.querySelector('#site-sound-toggle');
+const stanSoundToggle = document.querySelector('#stan-sound-toggle');
 
-soundToggle?.addEventListener('click', () => {
+const updateSoundToggle = (button, muted, label) => {
+  if (!button) return;
+  button.setAttribute('aria-pressed', String(!muted));
+  button.setAttribute('aria-label', muted ? `Enable ${label} sound` : `Disable ${label} sound`);
+  button.querySelector('span:last-child').textContent = muted ? 'Sound off' : 'Sound on';
+};
+
+backgroundSoundToggle?.addEventListener('click', () => {
   if (!backgroundVideo) return;
   backgroundVideo.muted = !backgroundVideo.muted;
   backgroundVideo.volume = 0.75;
-  soundToggle.setAttribute('aria-pressed', String(!backgroundVideo.muted));
-  soundToggle.setAttribute('aria-label', backgroundVideo.muted ? 'Enable background sound' : 'Disable background sound');
-  soundToggle.querySelector('span:last-child').textContent = backgroundVideo.muted ? 'Sound off' : 'Sound on';
+  if (!backgroundVideo.muted && mainVideo) {
+    mainVideo.muted = true;
+    updateSoundToggle(stanSoundToggle, true, 'Stan Lee video');
+  }
+  updateSoundToggle(backgroundSoundToggle, backgroundVideo.muted, 'background');
   backgroundVideo.play().catch(() => {});
 });
 
-document.querySelectorAll('.reel-card').forEach((card) => {
-  card.addEventListener('click', () => {
-    if (!mainVideo) return;
-    const source = mainVideo.querySelector('source');
-    const preview = card.querySelector('img');
-    const previousSource = mainVideo.dataset.src;
-    const previousPoster = mainVideo.poster;
-    const nextSource = card.dataset.videoSrc;
-    const nextPoster = card.dataset.poster;
-
-    mainVideo.pause();
-    source.src = nextSource;
-    mainVideo.dataset.src = nextSource;
-    mainVideo.poster = nextPoster;
-    card.dataset.videoSrc = previousSource;
-    card.dataset.poster = previousPoster;
-    preview.src = previousPoster;
-    mainVideo.load();
-    mainVideo.play().catch(() => {});
-    mainVideo.closest('.video-section')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  });
+stanSoundToggle?.addEventListener('click', () => {
+  if (!mainVideo) return;
+  mainVideo.muted = !mainVideo.muted;
+  mainVideo.volume = 0.75;
+  if (!mainVideo.muted && backgroundVideo) {
+    backgroundVideo.muted = true;
+    updateSoundToggle(backgroundSoundToggle, true, 'background');
+  }
+  updateSoundToggle(stanSoundToggle, mainVideo.muted, 'Stan Lee video');
+  mainVideo.play().catch(() => {});
 });
 
 const marquee = document.querySelector('.marquee-track');
